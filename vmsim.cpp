@@ -46,6 +46,8 @@ void getRef() {
 	    references.push_back(reference);
 	}
     }
+
+    infile.close();
 }
 
 /* simulate the memory page reference */
