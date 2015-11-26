@@ -33,7 +33,8 @@ set<int> s;
 /* function definitions */
 
 /* get references from the input file and store them into an array called frames */
-void getRef() {
+void getRef()
+{
     string line;
     ifstream infile(input_file);
 
@@ -52,7 +53,8 @@ void getRef() {
 }
 
 /* simulate the memory page reference */
-void run() {
+void run()
+{
     int (* next)(int curr_index, int ref_index);
     int replace_index = -1;
     bool page_fault = false;
@@ -104,7 +106,8 @@ void run() {
 }
 
 /* print the frame to standard out */
-void print_frame(int i, bool page_fault) {
+void print_frame(int i, bool page_fault)
+{
     	printf("%d: [", references[i]);
 	for (int i = 0; i < num_frames; ++i) {
 	    if (i < frames.size() && frames[i] < 10) {
@@ -129,12 +132,14 @@ void print_frame(int i, bool page_fault) {
 }
 
 /* FIFO policy */
-int next_FIFO(int cur_index, int ref_index) {
+int next_FIFO(int cur_index, int ref_index)
+{
     return (cur_index + 1) % num_frames;
 }
 
 /* Clock policy */
-int next_CLOCK(int cur_index, int ref_index) {
+int next_CLOCK(int cur_index, int ref_index)
+{
     cur_index = (cur_index + 1) % num_frames;
     while (usebits[cur_index]) {
 	usebits[cur_index] = false;
@@ -144,7 +149,8 @@ int next_CLOCK(int cur_index, int ref_index) {
 }
 
 /* OPT policy */
-int next_OPT(int cur_index, int ref_index) {
+int next_OPT(int cur_index, int ref_index)
+{
     int longest_time = 0, longest_index = 0;
     
     for (int i = 0; i < frames.size(); ++i) {
@@ -165,7 +171,8 @@ int next_OPT(int cur_index, int ref_index) {
 }
 
 /* LRU policy */
-int next_LRU(int cur_index, int ref_index) {
+int next_LRU(int cur_index, int ref_index)
+{
     int least_time = ref_index, least_index = 0;
     for (int i = 0; i < frames.size(); ++i) {
 	for (int j = ref_index - 1; j >= 0; --j) {
@@ -181,16 +188,23 @@ int next_LRU(int cur_index, int ref_index) {
     return least_index;
 }
 
-int main(int argc, char **argv) {
+int main(int argc, char **argv)
+{
     if (argc < 4) {
 	printf("usage: vmsim frame input algorithm\n");
 	return 1;
     }
+
     num_frames = stoi(argv[1]);
     input_file = argv[2];
     string algo = argv[3];
-    frames.reserve(num_frames);
+
+    if (num_frames > 100) {
+	fprintf(stderr, "the maximum number of physical memory frames is 100\n");
+	return 1;
+    }
     
+    frames.reserve(num_frames);    
 
     if (algo == "OPT" || algo == "opt") {
 	algorithm = OPT;
