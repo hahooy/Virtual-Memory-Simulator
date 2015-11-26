@@ -21,6 +21,7 @@ void run();
 void getRef();
 
 /* variable declaration */
+int miss = 0;
 int num_frames;
 string input_file;
 Algo algorithm;
@@ -85,6 +86,7 @@ void run() {
 	    } else {
 		replace_index = next(replace_index, i);
 		page_fault = true;
+		miss++;
 		s.erase(frames[replace_index]);
 		frames[replace_index] = references[i];
 	    }
@@ -120,7 +122,7 @@ void print_frame(int i, bool page_fault) {
 	    }
 	}
 	if (page_fault) {
-	    printf(" F\n");
+	    printf("  F\n");
 	} else {
 	    printf("\n");
 	}
@@ -154,9 +156,8 @@ int next_OPT(int cur_index, int ref_index) {
 		}
 		break;		    
 	    }
-	    if (j == references.size() - 1 && j > longest_time) {
-		longest_time = j; // also update if no reference is found in the future
-		longest_index = i;
+	    if (j == references.size() - 1) {
+		return i; // if no reference of this frame is found in the future, it must be the longest
 	    }
 	}
     }
@@ -174,10 +175,6 @@ int next_LRU(int cur_index, int ref_index) {
 		    least_index = i;
 		}
 		break;
-	    }
-	    if (j == 0 && j < least_time) { // this is redundant, the frame must have been referenced
-		least_time = j;
-		least_index = i;
 	    }
 	}
     }
@@ -211,4 +208,6 @@ int main(int argc, char **argv) {
 
     getRef();
     run();
+
+    printf("Miss rate = %d/%lu = %.2f%%\n", miss, references.size(), (double) miss / references.size() * 100);
 }
