@@ -1,3 +1,12 @@
+// cse422 Operating Systems
+// Virtual Memory Simulator
+// Team members:
+// Yilong Hu (hu.yilong@wustl.edu)
+// Yongzheng Huang (iamhuangyz@gmail.com)
+// Junyuan Suo (jsuo.mail@gmail.com)
+// File Purpose: vmsim.cpp simulates the working process of the virtual memory with different replacement policies.
+
+
 #include <stdio.h>
 #include <iostream>
 #include <sstream>
