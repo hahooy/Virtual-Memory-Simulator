@@ -182,7 +182,7 @@ int next_OPT(int cur_index, int ref_index)
 /* LRU policy */
 int next_LRU(int cur_index, int ref_index)
 {
-    int least_time = ref_index, least_index = 0;
+    unsigned int least_time = ref_index, least_index = 0;
     for (unsigned int i = 0; i < frames.size(); ++i) {
 	for (unsigned int j = ref_index - 1; j >= 0; --j) {
 	    if (frames[i] == references[j]) {
