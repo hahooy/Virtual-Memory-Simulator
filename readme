@@ -1,0 +1,47 @@
+Programming Assignment 3 – Virtual Memory Page Replacement Policies
+
+This project contains three separate executables: a page replacement
+simulator vmsim, and two page reference generators: vmgenU and vmgenWS.
+
+vmsim:
+		Usage: vmsim frame input algorithm
+		Sample input: > vmsim 5 vmrefs.txt LRU
+
+		frame: the total number of physical memory frames (maximum 100)
+		input: an input filename where a sequence of page references is stored
+		algorithm: the chosen algorithm (OPT, LRU, FIFO, or CLOCK)
+
+		This program simulates the virtual memory page replacement algorithms: Optimal (OPT), Least
+		Recently Used (LRU), First-In-First-Out (FIFO), and the single use-bit one-handed clock policy
+		(CLOCK).  After processing all the memory references, vmsim should finally print the total number of page faults and the miss rate (page faults divided by number of references).
+
+		Sample outcome: 
+
+
+vmgenU:
+		Usage: vmgenU range length file
+		Sample input: >vmgenU 10 200 vmrefs.dat
+		
+		range: the range of page references (maximum 100)
+		length: the length of the sequence of page references
+		file: the name of the file that will be generated
+
+		This program is a page reference generator.  It generates a sequence of page references of the desired length containing random page numbers uniformly drawn between 0 and the range minus one.
+
+		Sample outcome: 
+
+
+vmgenWS:
+		Usage: vmgenWS ws_size LB UB page_range(max 100) length file_name
+		Sample input: >vmgenWS 5 8 15 25 200 vmrefs.dat
+
+		ws_size: the size of the working set
+		LB: the lower bound on the number of pages to generate in a given working set exhibiting locality of reference
+		UB: the upper bound on the number of pages to generate in a given working set exhibiting locality of reference
+		page_range:	the range of page references (maximum 100)
+		length:	the length of the sequence of page references
+		file_name: the name of the file that will be generated
+
+		This program is a page reference generator.  
+
+		Sample outcome: 
