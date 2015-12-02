@@ -160,7 +160,7 @@ int next_CLOCK(int cur_index, int ref_index)
 /* OPT policy */
 int next_OPT(int cur_index, int ref_index)
 {
-    int longest_time = 0, longest_index = 0;
+    unsigned int longest_time = 0, longest_index = 0;
     
     for (unsigned int i = 0; i < frames.size(); ++i) {
 	for (unsigned int j = ref_index + 1; j < references.size(); ++j) {
