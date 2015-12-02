@@ -31,7 +31,7 @@ void getRef();
 
 /* variable declaration */
 int miss = 0;
-int num_frames;
+unsigned int num_frames;
 string input_file;
 Algo algorithm;
 vector<bool> usebits;
@@ -85,7 +85,7 @@ void run()
     }
 
     /* check all page references */
-    for (int i = 0; i < references.size(); ++i) {
+    for (unsigned int i = 0; i < references.size(); ++i) {
 	if (s.find(references[i]) == s.end()) {
 	    /* page fault */
 	    s.insert(references[i]);
@@ -118,7 +118,7 @@ void run()
 void print_frame(int i, bool page_fault)
 {
     	printf("%d: [", references[i]);
-	for (int i = 0; i < num_frames; ++i) {
+	for (unsigned int i = 0; i < num_frames; ++i) {
 	    if (i < frames.size() && frames[i] < 10) {
 		printf(" %d", frames[i]);
 	    } else if (i < frames.size() && frames[i] > 10) {
@@ -162,8 +162,8 @@ int next_OPT(int cur_index, int ref_index)
 {
     int longest_time = 0, longest_index = 0;
     
-    for (int i = 0; i < frames.size(); ++i) {
-	for (int j = ref_index + 1; j < references.size(); ++j) {
+    for (unsigned int i = 0; i < frames.size(); ++i) {
+	for (unsigned int j = ref_index + 1; j < references.size(); ++j) {
 	    if (frames[i] == references[j]) {
 		if (j > longest_time) {
 		    longest_time = j; // found a page whose time to the next reference is longer, update the time and index
@@ -183,8 +183,8 @@ int next_OPT(int cur_index, int ref_index)
 int next_LRU(int cur_index, int ref_index)
 {
     int least_time = ref_index, least_index = 0;
-    for (int i = 0; i < frames.size(); ++i) {
-	for (int j = ref_index - 1; j >= 0; --j) {
+    for (unsigned int i = 0; i < frames.size(); ++i) {
+	for (unsigned int j = ref_index - 1; j >= 0; --j) {
 	    if (frames[i] == references[j]) {
 		if (j < least_time) {
 		    least_time = j; // update time and index

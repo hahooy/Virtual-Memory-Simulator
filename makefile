@@ -1,6 +1,6 @@
 vmsim:
-	g++ -g -Wall vmsim.cpp -o vmsim
+	g++ -std=c++11 -g -Wall vmsim.cpp -o vmsim
 vmgenU:
-	g++ -g -Wall vmgenU.cpp -o vmgen
+	g++ -std=c++11 -g -Wall vmgenU.cpp -o vmgen
 vmgenWS:
-	g++ -g -Wall vmgenWS.cpp -o vmgenWS
+	g++ -std=c++11 -g -Wall vmgenWS.cpp -o vmgenWS
