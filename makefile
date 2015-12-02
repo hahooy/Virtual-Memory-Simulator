@@ -4,3 +4,5 @@ vmgenU:
 	g++ -std=c++11 -g -Wall vmgenU.cpp -o vmgenU
 vmgenWS:
 	g++ -std=c++11 -g -Wall vmgenWS.cpp -o vmgenWS
+clean:
+	rm vmsim vmgenU vmgenWS
